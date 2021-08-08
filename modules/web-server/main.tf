@@ -79,7 +79,7 @@ connection {
   provisioner "remote-exec" {
 
       inline = [
-        "sudo yum update -y", "sudo yum install docker -y","sudo systemctl start docker","sudo docker run -d -p 80:80 umutderman/jenkins:tagname "
+        "sudo yum update -y", "sudo yum install docker -y","sudo systemctl start docker","sudo docker run -d -p 80:80 umutderman/jenkins:latest "
       ]
     
 }

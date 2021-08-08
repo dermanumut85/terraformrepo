@@ -62,7 +62,7 @@ resource "aws_instance" "my-server" {
   key_name        = aws_key_pair.my-server-key.key_name
   security_groups = [aws_security_group.allow-ssh-web.id]
 
-  user_data = file("./myscript.sh")
+  
 
   tags = {
     "Name" = "${var.environment}-my-server"

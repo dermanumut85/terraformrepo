@@ -16,7 +16,7 @@ data "aws_ami" "amazon-2-latest" {
 
 resource "aws_key_pair" "my-server-key" {
   key_name   = "my-server-key.pem"
-  public_key = file("/home/umut/.ssh/my-server-key.pem.pub")
+  public_key = file("/var/jenkins_home/my-server-key.pem.pub")
 }
 
 resource "aws_security_group" "allow-ssh-web" {
@@ -71,7 +71,7 @@ resource "aws_instance" "my-server" {
 connection {
     type     = "ssh"
     user     = "ec2-user"
-    private_key = file("/home/umut/.ssh/my-server-key.pem")
+    private_key = file("/var/jenkins_home/my-server-key.pem")
     host = self.public_ip
   }
 
@@ -79,7 +79,7 @@ connection {
   provisioner "remote-exec" {
 
       inline = [
-        "sudo yum update -y", "sudo yum install docker -y","sudo systemctl start docker","sudo docker run -d -p 90:80 nginx "
+        "sudo yum update -y", "sudo yum install docker -y","sudo systemctl start docker","sudo docker run -d -p 80:80 umutderman/jenkins:tagname "
       ]
     
 }
